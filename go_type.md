@@ -19,10 +19,26 @@
 
 # 类型零值
 * 零值并不等于空值，而是当变量被声明为某种类型后的默认值.
-    整数类型：0
-    bool: false
-    string: ""
+```js
+整数类型： 0
+boo： fals
+string: ""
+引用类型： nil
 
+如：
+var a int
+fmt.Println(a) 输出：0
+
+var b bool
+fmt.Println(b) 输出：false
+
+var c string
+fmt.Println(c) 输出：“”
+
+var slice []int
+fmt.Println(slice) 输出：[]
+fmt.Println(slice == nil) 输出：true
+```
 # 变量的声明和赋值
 ```js
 var a int //变量的声明
