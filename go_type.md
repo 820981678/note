@@ -22,6 +22,7 @@
     整数类型：0
     bool: false
     string: ""
+
 # 变量的声明和赋值
 ```js
 var a int //变量的声明
