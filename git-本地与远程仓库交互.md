@@ -1,4 +1,4 @@
-# Git将本地代码提交到远程仓库
+# Git本地与远程仓库交互
 如何将自己的本地代码库提交到远程Git仓库中，如：github、oschina等远程git代码仓库。
 
 ## 1. 初始化本地仓库
@@ -57,3 +57,47 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 git pull --rebase origin master
 ```
 执行上面代码后可以看到本地代码库中多了README.md文件，然后在执行第4步骤的命令将本地代码库提交到远程仓库中。
+
+## 6.更新远程仓库代码到本地
+Git中从远程的分支获取最新的版本到本地有这样2个命令：
+
+### git fetch
+相当于是从远程获取最新版本到本地，不会自动merge
+```
+git fetch origin master
+git log -p master..origin/master
+git merge origin/master
+```
+以上命令的含义：
+
+首先从远程的origin的master主分支下载最新的版本到origin/master分支上
+然后比较本地的master分支和origin/master分支的差别
+最后进行合并
+上述过程其实可以用以下更清晰的方式来进行：
+```
+git fetch origin master:tmp
+git diff tmp 
+git merge tmp
+```
+从远程获取最新的版本到本地的test分支上，之后再进行比较合并
+
+### git pull
+相当于是从远程获取最新版本并merge到本地
+```
+git pull origin master
+```
+上述命令其实相当于git fetch 和 git merge
+在实际使用中，git fetch更安全一些
+因为在merge前，我们可以查看更新情况，然后再决定是否合并
+
+### 强制覆盖本地内容
+本地有修改和提交，如何强制用远程的库更新更新。我尝试过用git pull -f，总是提示 You have not concluded your merge. (MERGE_HEAD exists)。
+
+我需要放弃本地的修改，用远程的库的内容就可以，应该如何做？傻傻地办法就是用心的目录重新clone一个，正确的做法是什么？
+
+正确的做法应该是：
+```
+git fetch --all
+git reset --hard origin/master
+```
+git fetch 只是下载远程的库的内容不做任何的合并，git reset 把HEAD指向刚刚下载的最新的版本
