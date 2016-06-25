@@ -15,6 +15,11 @@ git remote add origin https://git.oschina.net/happiness/note.git
 ```
 其中`https://git.oschina.net/happiness/note.git`为远程仓库`https`地址。
 
+如出现`git remote add origin`错误提示，需要使用命令先删除掉仓库：
+```
+git remote rm origin
+```
+
 ## 3.提交代码到本地仓库
 查看本地需要提交的文件状态，使用如下命令：
 ```
